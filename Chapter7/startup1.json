@@ -1,0 +1,16 @@
+[
+  {
+    "description":"first mock",
+    "request":{
+      "uri":"/demo"
+    },
+    "response":{
+      "text":"第一个moco",
+
+      "headers":{
+        "Content-Type":"text/html;charset=gbk"
+      }
+
+    }
+  }
+]
