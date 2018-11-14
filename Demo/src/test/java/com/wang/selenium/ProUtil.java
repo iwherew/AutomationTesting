@@ -1,7 +1,10 @@
 package com.wang.selenium;
 
+import org.testng.annotations.Test;
+
 import java.io.*;
 import java.util.Properties;
+
 
 public class ProUtil {
 

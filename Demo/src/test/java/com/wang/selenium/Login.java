@@ -1,27 +1,34 @@
 package com.wang.selenium;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.aventstack.extentreports.utils.FileUtil;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+import org.apache.commons.io.FileUtils;
+
 
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Login {
+@Listeners({TestNGListenerScreenShot.class})
+public class Login extends baseDriver{
     public WebDriver driver;
-
+    //@Test
     public void InitDriver(){
-        System.setProperty("webdriver.chrome.driver","C:\\Users\\iwhere\\AppData\\Local\\Google\\Chrome\\Application\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\Hasee\\AppData\\Local\\Google\\Chrome\\Application\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://www.imooc.com");
         driver.manage().window().maximize();
-        driver.findElement(By.id("js-signin-btn")).click();
+
     }
 
+    //@Test(dependsOnMethods = {"InitDriver"})
     public void loginScript(String username,String userpass,String testName) throws Exception {
         this.InitDriver();
         /*
@@ -44,7 +51,7 @@ public class Login {
 
 //        String testName = "我只想摸鱼";
 
-
+        driver.findElement(By.id("js-signin-btn")).click();
         Thread.sleep(2000);
         WebElement user = this.element(this.byStr("username"));
         user.isDisplayed();
@@ -65,11 +72,12 @@ public class Login {
         actions.moveToElement(header).perform();
         String userInfo = this.element(this.byStr("nameInfo")).getText();
         if(userInfo.equals(testName)){
+            this.takeScreenShot();
             System.out.println("登录成功");
         }else{
             System.out.println("登录失败");
         }
-//        driver.quit();
+        driver.quit();
 //        driver.close();
 
 //        System.out.println(userInfo);
@@ -77,7 +85,7 @@ public class Login {
 
     /*封装By*/
     public By byStr(String elementKey) throws Exception {
-        ProUtil properties = new ProUtil("D:\\Workspaces\\muke\\AutoTest\\Demo\\element.properties");
+        ProUtil properties = new ProUtil("D:\\code\\java\\AutoTest\\Demo\\element.properties");
         String locator = properties.getPro(elementKey);
         String locatorType = locator.split(">")[0];
         String locatorValue = locator.split(">")[1];
@@ -97,6 +105,23 @@ public class Login {
     public WebElement element(By by){
         WebElement ele = driver.findElement(by);
         return ele;
+    }
+
+    /*
+     截图
+     */
+    public void takeScreenShot(){
+        long date = System.currentTimeMillis();
+        String path = String.valueOf(date);
+        String curPath = System.getProperty("user.dir");
+        path = path+".png";
+        String screenPath = curPath+"/"+path;
+        File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(screen,new File(screenPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) throws Exception {
