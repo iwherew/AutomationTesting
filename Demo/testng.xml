@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<suite name="suitename">
-    <test name="testname">
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Simple Logger Suite">
+    <listeners>
+        <listener class-name="com.wang.selenium.CustomListener" />
+    </listeners>
+
+    <test name="Simple Logger test">
         <classes>
-            <class name="com.wang.selenium.LoginTest"/>
+            <class name="com.wang.selenium.SampleTest" />
         </classes>
     </test>
 </suite>
