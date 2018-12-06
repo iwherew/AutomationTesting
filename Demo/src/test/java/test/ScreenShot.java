@@ -15,10 +15,14 @@ public class ScreenShot {
     }
 
     private void takeScreenshot(String screenPath) {
+        long date = System.currentTimeMillis();
+        String path = String.valueOf(date);
+        String curPath = System.getProperty("user.dir");
+        path = path+".png";
+        screenPath = curPath+"/"+path;
         try {
-            File scrFile = ((TakesScreenshot) driver)
-                    .getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(scrFile, new File(screenPath));
+            File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(screen,new File(screenPath));
         } catch (IOException e) {
             System.out.println("Screen shot error: " + screenPath);
         }

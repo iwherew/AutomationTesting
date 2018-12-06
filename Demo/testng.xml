@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Simple Logger Suite">
-    <listeners>
-        <listener class-name="com.wang.selenium.CustomListener" />
-    </listeners>
+    <!--<listeners>-->
+    <!--&lt;!&ndash;<listener class-name="test.CustomListener" />&ndash;&gt;-->
+<!--</listeners>-->
 
     <test name="Simple Logger test">
         <classes>
-            <class name="com.wang.selenium.SampleTest" />
+            <!--<class name="test.SampleTest" />-->
+            <class name="com.wang.selenium.testCase.login"/>
         </classes>
-    </test>
+</test>
 </suite>

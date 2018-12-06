@@ -17,11 +17,12 @@ import java.util.Iterator;
 import java.util.Map;
 
 @Listeners({TestNGListenerScreenShot.class})
-public class Login extends baseDriver{
+public class Login extends baseDriver {
     public WebDriver driver;
+
     //@Test
-    public void InitDriver(){
-        System.setProperty("webdriver.chrome.driver","C:\\Users\\Hasee\\AppData\\Local\\Google\\Chrome\\Application\\chromedriver.exe");
+    public void InitDriver() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Hasee\\AppData\\Local\\Google\\Chrome\\Application\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://www.imooc.com");
         driver.manage().window().maximize();
@@ -29,7 +30,7 @@ public class Login extends baseDriver{
     }
 
     //@Test(dependsOnMethods = {"InitDriver"})
-    public void loginScript(String username,String userpass,String testName) throws Exception {
+    public void loginScript(String username, String userpass, String testName) throws Exception {
         this.InitDriver();
         /*
         String username = "18768113917";
@@ -71,11 +72,17 @@ public class Login extends baseDriver{
         Actions actions = new Actions(driver);
         actions.moveToElement(header).perform();
         String userInfo = this.element(this.byStr("nameInfo")).getText();
-        if(userInfo.equals(testName)){
+        if (userInfo.equals(testName)) {
             this.takeScreenShot();
             System.out.println("登录成功");
-        }else{
-            System.out.println("登录失败");
+        } else {
+            try {
+                throw new Exception("抛出异常");
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("捕获异常");
+            }
+            //System.out.println("登录失败");
         }
         driver.quit();
 //        driver.close();
@@ -90,19 +97,19 @@ public class Login extends baseDriver{
         String locatorType = locator.split(">")[0];
         String locatorValue = locator.split(">")[1];
 
-        if(locatorType.equals("id")){
+        if (locatorType.equals("id")) {
             return By.id(locatorValue);
-        }else if(locatorType.equals("name")){
+        } else if (locatorType.equals("name")) {
             return By.name(locatorValue);
-        }else if(locatorType.equals("className")){
+        } else if (locatorType.equals("className")) {
             return By.className(locatorValue);
-        }else{
+        } else {
             return By.xpath(locatorValue);
         }
     }
 
     /*封装Element*/
-    public WebElement element(By by){
+    public WebElement element(By by) {
         WebElement ele = driver.findElement(by);
         return ele;
     }
@@ -110,15 +117,15 @@ public class Login extends baseDriver{
     /*
      截图
      */
-    public void takeScreenShot(){
+    public void takeScreenShot() {
         long date = System.currentTimeMillis();
         String path = String.valueOf(date);
         String curPath = System.getProperty("user.dir");
-        path = path+".png";
-        String screenPath = curPath+"/"+path;
+        path = path + ".png";
+        String screenPath = curPath + "/" + path;
         File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(screen,new File(screenPath));
+            FileUtils.copyFile(screen, new File(screenPath));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -128,17 +135,17 @@ public class Login extends baseDriver{
         Login login = new Login();
 //        login.loginScript("18768113917","123456");
 
-        HashMap<String,String> user = new HashMap<String,String>();
-        user.put("18768113917","123456>我只想摸鱼");
-        user.put("18767175519","123456789>摸鱼多好");
+        HashMap<String, String> user = new HashMap<String, String>();
+        user.put("18768113917", "123456>我只想摸鱼");
+        user.put("18767175519", "123456789>摸鱼多好");
         Iterator us = user.entrySet().iterator();
-        while(us.hasNext()){
-            Map.Entry entry = (Map.Entry)us.next();
+        while (us.hasNext()) {
+            Map.Entry entry = (Map.Entry) us.next();
             String username = entry.getKey().toString();
             String password = entry.getValue().toString().split(">")[0];
             String userInfo = entry.getValue().toString().split(">")[1];
 //            System.out.println(username+" "+password);
-            login.loginScript(username,password,userInfo);
+            login.loginScript(username, password, userInfo);
         }
     }
 }

@@ -3,7 +3,7 @@ package test;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners({ DotTestListener.class })
+@Listeners({ TestngListener.class })
 public class Test10 extends TestBase{
 
     @Test

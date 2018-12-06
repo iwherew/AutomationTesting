@@ -1,8 +1,10 @@
-package com.wang.selenium;
+package test;
 
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners({CustomListener.class})
 public class SampleTest {
     @Test
     public void testMethodOne(){

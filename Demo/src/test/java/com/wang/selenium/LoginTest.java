@@ -5,8 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
-public class LoginTest {
-    public WebDriver driver;
+public class LoginTest extends baseDriver{
+    //public WebDriver driver;
 
 
     public void InitDriver() throws InterruptedException {

@@ -18,18 +18,20 @@ public class TestNGListenerScreenShot extends TestListenerAdapter {
     @Override
     public void onTestSuccess(ITestResult tr) {
         super.onTestSuccess(tr);
+        System.out.println("测试成功");
     }
 
     @Override
     public void onTestFailure(ITestResult tr) {
         super.onTestFailure(tr);
-        takeScreenShot();
+        System.out.println("测试失败");
+        this.takeScreenShot(tr);
     }
 
-    /*private void takeScreenShot(ITestResult tr) {
+    private void takeScreenShot(ITestResult tr) {
         baseDriver b = (baseDriver) tr.getInstance();
         b.takeScreenShot();
-    }*/
+    }
 
     /*
      截图
