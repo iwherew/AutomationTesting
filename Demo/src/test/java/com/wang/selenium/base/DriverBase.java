@@ -76,4 +76,18 @@ public class DriverBase {
         driver.get(url);
     }
 
+    /**
+     * 返回
+     * */
+    public void back(){
+        driver.navigate().back();
+    }
+
+    /**
+     * 最大化
+     * */
+    public void maximize(){
+        driver.manage().window().maximize();
+    }
+
 }

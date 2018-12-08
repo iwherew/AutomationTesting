@@ -26,7 +26,7 @@ public class Login extends baseDriver {
         driver = new ChromeDriver();
         driver.get("http://www.imooc.com");
         driver.manage().window().maximize();
-
+        
     }
 
     //@Test(dependsOnMethods = {"InitDriver"})
